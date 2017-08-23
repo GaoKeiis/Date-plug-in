@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>Mobiscroll 2.13.2</title>
+    <script src="script/jquery-1.9.1.js"></script>
+    <script src="script/mobiscroll.2.13.2.js"></script>
+    <link href="style/mobiscroll.2.13.2.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {  
+				'default': {
+					theme: 'default',
+					mode: 'scroller',
+					display: 'modal',
+					animate: 'fade',
+					endYear: 1990,
+                },
+				'dateY': {
+                    preset: 'date',
+					dateFormat: 'yyyy',
+					defaultValue: new Date(new Date()),	
+					onBeforeShow: function (inst) { 
+						if(inst.settings.wheels[0].length>1)
+						{
+							inst.settings.wheels[0].pop();
+							inst.settings.wheels[0].pop();
+						}else{
+							null
+						}
+					}
+                },			
+				'dateYM': {
+                    preset: 'date',
+					dateFormat: 'yyyy-mm',
+					defaultValue: new Date(new Date()),					
+					onBeforeShow: function (inst) { 
+						if(inst.settings.wheels[0].length>2)
+						{
+							inst.settings.wheels[0].pop();
+						}else{
+							null
+						}
+					}
+                },
+				'dateYMD': {
+                    preset: 'date',
+					dateFormat: 'yyyy-mm-dd',
+					defaultValue: new Date(new Date())
+                },
+                'datetime': {
+                    preset: 'datetime',
+                    minDate: new Date(2012, 3, 10, 9, 22),
+                    maxDate: new Date(2014, 7, 30, 15, 44),
+                    stepMinute: 5
+                },
+                'time': {
+                    preset: 'time'
+                },
+                'select': {
+                    preset: 'select'
+                },
+                'select-opt': {
+                    preset: 'select',
+                    group: true,
+                    width: 50
+                }
+            }
+			$('#demo3').scroller($.extend(opt['dateYMD'],opt['default']));
+            $('.demo-test-select').scroller($.extend(opt['select'],opt['default']));
+			$('.demo-test-select-opt').scroller($.extend(opt['select-opt'],opt['default']));
+        });
+       
+
+    </script>
+</head>
+<body>
+<div class="content">
+       <div class="settings">
+			
+			<label for="demo3">日期-年月日</label>
+			<input id="demo3" placeholder="请选择出生年月" />  
+			<button id="btn">点击</button>
+        </div>        
+    </div>
+</body>
+<script type="text/javascript">
+	        $("#btn").on("click",function(){
+        	console.log(1)
+        	 console.log($("#demo3").val())
+        })
+</script>
+</html>
